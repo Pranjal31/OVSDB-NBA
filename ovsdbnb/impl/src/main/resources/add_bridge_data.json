@@ -1,0 +1,10 @@
+{
+  "network-topology:node": [{
+    "node-id": "$nodeid/bridge/$bridge",
+    "ovsdb:bridge-name": "$bridge",
+    "ovsdb:protocol-entry": [{
+      "protocol": "ovsdb:ovsdb-bridge-protocol-openflow-13"
+    }],
+    "ovsdb:managed-by": "/network-topology:network-topology/network-topology:topology[network-topology:topology-id='ovsdb:1']/network-topology:node[network-topology:node-id='$nodeid']"
+  }]
+}

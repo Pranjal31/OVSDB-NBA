@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- vi: set et smarttab sw=4 tabstop=4: -->
+<!--
+Copyright © 2017 Pranjal Sharma and others. All rights reserved.
+
+This program and the accompanying materials are made available under the
+terms of the Eclipse Public License v1.0 which accompanies this distribution,
+and is available at http://www.eclipse.org/legal/epl-v10.html
+-->
+<features name="odl-ovsdbnb-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
+  <repository>mvn:org.opendaylight.yangtools/features-yangtools/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.netconf/features-restconf/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.dluxapps/features-dluxapps/{{VERSION}}/xml/features</repository>
+  <repository>mvn:org.opendaylight.ovsdb/southbound-features/1.4.4-Carbon/xml/features</repository>
+
+  <feature name='odl-ovsdbnb-api' version='${project.version}' description='OpenDaylight :: ovsdbnb :: api'>
+    <feature version='${mdsal.model.version}'>odl-mdsal-models</feature>
+    <bundle>mvn:com.ps.odl/ovsdbnb-api/{{VERSION}}</bundle>
+  </feature>
+  <feature name='odl-ovsdbnb' version='${project.version}' description='OpenDaylight :: ovsdbnb'>
+    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+    <feature version='${project.version}'>odl-ovsdbnb-api</feature>
+    <feature version='1.4.4-Carbon'>odl-ovsdb-southbound-impl-ui</feature>
+    <feature version='1.4.4-Carbon'>odl-ovsdb-southbound-api</feature>
+    <bundle>mvn:com.ps.odl/ovsdbnb-impl/{{VERSION}}</bundle>
+    <bundle>wrap:mvn:org.apache.httpcomponents/httpclient/4.5.5</bundle>
+    <bundle>wrap:mvn:org.apache.httpcomponents/httpcore/4.4.9</bundle>
+  </feature>
+  <feature name='odl-ovsdbnb-rest' version='${project.version}' description='OpenDaylight :: ovsdbnb :: REST'>
+    <feature version="${project.version}">odl-ovsdbnb</feature>
+    <feature version="${restconf.version}">odl-restconf</feature>
+  </feature>
+  <feature name='odl-ovsdbnb-ui' version='${project.version}' description='OpenDaylight :: ovsdbnb :: UI'>
+    <feature version="${project.version}">odl-ovsdbnb-rest</feature>
+    <feature version="${restconf.version}">odl-mdsal-apidocs</feature>
+    <feature version="${dluxapps.version}">odl-dluxapps-yangman</feature>
+  </feature>
+  <feature name='odl-ovsdbnb-cli' version='${project.version}' description='OpenDaylight :: ovsdbnb :: CLI'>
+    <feature version="${project.version}">odl-ovsdbnb</feature>
+    <bundle>mvn:com.ps.odl/ovsdbnb-cli/{{VERSION}}</bundle>
+  </feature>
+
+</features>

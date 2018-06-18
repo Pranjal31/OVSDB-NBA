@@ -1,0 +1,6 @@
+{
+  "network-topology:termination-point": [{
+    "ovsdb:name": "$port_name",
+    "tp-id": "$port_name"
+  }]
+}

@@ -1,0 +1,9 @@
+{
+  "network-topology:node": [{
+    "node-id": "$nodeid",
+    "connection-info": {
+      "ovsdb:remote-port": "$ovs_host_port",
+      "ovsdb:remote-ip": "$ovs_host_ip"
+    }
+  }]
+}

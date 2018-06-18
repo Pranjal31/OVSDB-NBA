@@ -1,0 +1,91 @@
+module ovsdbnb {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:ovsdbnb";
+    prefix "ovsdb";
+
+    revision "2018-06-18" {
+        description "Initial revision of ovsdbnb model";
+    }
+
+    contact
+        "Pranjal Sharma <pranjalsharma3108@gmail.com>";
+
+    description
+    "Data model to abstract basic OVSDB operations";
+
+    grouping response-code {
+        	leaf response-code {
+        		type string;
+        		description "response code";
+        	}
+        	leaf response-message {
+        		type string;
+        		description "response message";
+        	}
+    }
+
+
+
+    rpc add-bridge {
+        	input {
+        		leaf bridge-name {
+        		    mandatory true;
+        			type string;
+        			description "Bridge to be added on OvS ";
+        		}
+        	}
+        	output {
+        		uses response-code;
+        	}
+    }
+    rpc delete-bridge {
+            input {
+                leaf bridge-name {
+                    mandatory true;
+                    type string;
+                    description "Bridge to be deleted from OvS";
+                }
+            }
+            output {
+                uses response-code;
+            }
+    }
+
+
+
+    rpc add-port {
+            input {
+                leaf bridge-name {
+                    mandatory true;
+                    type string;
+                    description "Bridge on which port has to be added";
+                }
+                leaf port-name {
+                    mandatory true;
+                    type string;
+                    description "Port to be added to the given bridge";
+                }
+            }
+            output {
+                uses response-code;
+            }
+    }
+
+    rpc delete-port {
+            input {
+                leaf bridge-name {
+                    mandatory true;
+                    type string;
+                    description "Bridge from which port has to be deleted";
+                }
+                leaf port-name {
+                    mandatory true;
+                    type string;
+                    description "port to be deleted from the given bridge";
+                }
+            }
+            output {
+                uses response-code;
+            }
+    }
+}
